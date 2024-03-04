@@ -50,8 +50,6 @@ int main()
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
 	glViewport(0, 0, 800, 800);
 
-
-
 	// Create Vertex Shader Object and get its reference
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	// Attach Vertex Shader source to the Vertex Shader Object
@@ -85,7 +83,7 @@ int main()
 	{
 		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
 		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
+		0.5f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
 	};
 
 	// Create reference containers for the Vartex Array Object and the Vertex Buffer Object
@@ -112,21 +110,17 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-
+	glPointSize(5);
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
-		// Specify the color of the background
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		// Clean the back buffer and assign the new color to it
-		glClear(GL_COLOR_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
 		glUseProgram(shaderProgram);
 		// Bind the VAO so OpenGL knows to use it
 		glBindVertexArray(VAO);
 		// Draw the triangle using the GL_TRIANGLES primitive
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_POINTS, 0, 3);
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
